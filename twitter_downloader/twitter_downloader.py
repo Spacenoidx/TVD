@@ -7,7 +7,7 @@ import bs4
 
 from tqdm import tqdm
 from pathlib import Path
-
+from tkinter import filedialog
 
 def download_video(url, file_name) -> None:
     """Download a video from a URL into a filename.
@@ -22,7 +22,9 @@ def download_video(url, file_name) -> None:
     block_size = 1024
     progress_bar = tqdm(total=total_size, unit="B", unit_scale=True)
 
-    download_path = os.path.join(Path.home(), "Downloads", file_name)
+    directory = filedialog.askdirectory(title="Select a folder to save your video.")
+
+    download_path = directory + "/" + file_name
 
     with open(download_path, "wb") as file:
         for data in response.iter_content(block_size):
